@@ -27,6 +27,9 @@ def serialize_cupcake(cupcake):
     }
 
 
+@app.route("/")
+def show_start_page():
+    return render_template("start.html")
 
 @app.route("/api/cupcakes", methods = ["GET"])
 

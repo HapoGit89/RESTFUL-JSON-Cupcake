@@ -1,0 +1,14 @@
+.thumbnail {
+    max-height: 120px;
+    max-width: auto;
+}
+
+
+#input{
+    display: flex;
+    flex-direction: column;
+}
+
+#submit {
+    width: 120px;
+}
