@@ -1,7 +1,8 @@
 from unittest import TestCase
-
+from flask import session
 from app import app
 from models import db, Cupcake
+from flask_sqlalchemy import SQLAlchemy
 
 # Use test database and don't clutter tests with SQL
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///cupcakes_test'
@@ -43,9 +44,11 @@ class CupcakeViewsTestCase(TestCase):
             Cupcake.query.delete()
 
             cupcake = Cupcake(**CUPCAKE_DATA)
+            self.cupcake = cupcake
             db.session.add(cupcake)
             db.session.commit()
-            self.cupcake = cupcake
+            print(cupcake.id)
+           
 
             
 
@@ -56,29 +59,28 @@ class CupcakeViewsTestCase(TestCase):
 
     def test_list_cupcakes(self):
          
-        
-        with app.test_client() as client:
-            
-            resp = client.get("/api/cupcakes")
-            
-           
-            self.assertEqual(resp.status_code, 200)
+            with app.test_client() as client:
+                
+                resp = client.get("/api/cupcakes")
+                
+                self.assertEqual(resp.status_code, 200)
 
-            data = resp.json
-            self.assertEqual(data, {
-                "cupcakes": [
-                    {
-                        "id": self.cupcake.id,
-                        "flavor": "TestFlavor",
-                        "size": "TestSize",
-                        "rating": 5,
-                        "image": "http://test.com/cupcake.jpg"
-                    }
-                ]
-            })
+                data = resp.json
+                self.assertEqual(data, {
+                    "cupcakes": [
+                        {
+                            "id": self.cupcake.id,
+                            "flavor": "TestFlavor",
+                            "size": "TestSize",
+                            "rating": 5,
+                            "image": "http://test.com/cupcake.jpg"
+                        }
+                    ]
+                })
 
     def test_get_cupcake(self):
-        with app.test_client() as client:
+    
+        with app.test_client() as client:  
             url = f"/api/cupcakes/{self.cupcake.id}"
             resp = client.get(url)
 
