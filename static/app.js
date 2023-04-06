@@ -23,6 +23,7 @@ async function postCupcake(){
 }
 
 async function onStart(){
+    cupcakes.innerHTML=''
     resp =await getCupcakes()
     console.log(resp.cupcakes)
     for (let cake of resp.cupcakes){

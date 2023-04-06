@@ -12,3 +12,8 @@
 #submit {
     width: 120px;
 }
+
+#cupcake-output{
+    display: flex;
+    flex-wrap: wrap;
+}
