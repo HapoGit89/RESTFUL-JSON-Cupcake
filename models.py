@@ -27,3 +27,4 @@ class Cupcake (db.Model):
     rating = db.Column(db.Float)
     image = db.Column(db.Text, default = "https://tinyurl.com/demo-cupcake")
 
+

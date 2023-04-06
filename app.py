@@ -53,12 +53,25 @@ def create_cupcake():
     try:
         image = request.json["image"]
     except:
-        image = "https://images.eatsmarter.de/sites/default/files/styles/max_size/public/cupcake-mit-rosa-creme-435108.jpg"
-   
+        image = "https://tinyurl.com/demo-cupcake"
     cake = Cupcake(flavor = flavor, size = size, rating = rating, image = image)
     
     db.session.add(cake)
     db.session.commit()
     cake_ser = serialize_cupcake(cake)
     return (jsonify(cupcake=cake_ser), 201)
+
+@app.route("/api/cupcakes/<id>", methods = ["PATCH"])
+def update_cupcake(id):
+    cake = Cupcake.query.get_or_404(id)
+    cake.flavor = request.json["flavor"]
+    cake.size = request.json["size"]
+    cake.rating = request.json["rating"]
+    try:
+        cake.image = request.json["image"]
+    except:
+        cake.image = "https://tinyurl.com/demo-cupcake"
+    db.session.add(cake)
+    db.session.commit()
+    return (jsonify(serialize_cupcake(cake)))
 
