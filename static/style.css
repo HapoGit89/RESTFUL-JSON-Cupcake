@@ -5,15 +5,29 @@
 
 
 #input{
-    display: flex;
-    flex-direction: column;
+    display:grid;
+    grid-template-columns: max-content;
+    grid-gap:5px;
+    text-align: right;
+
 }
 
 #submit {
     width: 120px;
+    margin-left: 40%;
 }
 
 #cupcake-output{
     display: flex;
     flex-wrap: wrap;
+}
+
+.cupcake-details{
+    border-style: solid;
+    border-color: black;
+    border-width: thin;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    margin: 2% ;
+    padding: 2%;
 }

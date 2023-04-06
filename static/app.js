@@ -34,6 +34,7 @@ async function onStart(){
         const newRating = document.createElement("li");
         newImg.src = cake.image
         newImg.classList.add("thumbnail")
+        newUl.classList.add("cupcake-details")
         newFlav.innerText = `Flavor: ${cake.flavor}`
         newSize.innerText = `Size: ${cake.size}`
         newRating.innerText = `Rating: ${cake.rating}`
